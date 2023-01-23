@@ -29,6 +29,7 @@ function GithubRepo() {
     const { enqueueSnackbar } = useSnackbar();
 
     const handlePageChange = async (event, value) => {
+        setIsLoading(true)
         setPage(value);
         await performRepoAPICall()
     };
@@ -37,10 +38,12 @@ function GithubRepo() {
         if ((page == 1 && opt == "-") || (page == pageLimit && opt == "+")) {
             return;
         } else if (opt == "-") {
+            setIsLoading(true)
             setPage(--page)
             await performRepoAPICall()
             return
         } else if (opt == "+") {
+            setIsLoading(true)
             setPage(++page)
             await performRepoAPICall()
             return
